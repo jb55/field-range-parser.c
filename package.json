@@ -1,0 +1,9 @@
+{
+  "name": "field-range-parser",
+  "version": "0.0.1",
+  "repo": "jb55/field-range-parser.c",
+  "description": "Parse field ranges (like the cut command)",
+  "keywords": ["cut", "fields"],
+  "license": "MIT",
+  "src": ["src/field-range-parser.c", "src/field-range-parser.h"]
+}
