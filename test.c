@@ -43,11 +43,11 @@ int main(int argc, const char **argv) {
   field_range_free(&fs, NULL);
 
   field_range_init(&fs, NULL);
-  field_range_parse(&fs, "3,4,5-11");
-  cmp_ok(fs.num_explicit_fields, "==", 9, "should have 9 fields set");
-  ok(field_range_is_set(&fs, 3), "field 3 set");
-  ok(field_range_is_set(&fs, 4), "field 4 set");
-  ok(field_range_is_set(&fs, 5), "field 5 set");
+  field_range_parse(&fs, "-10000");
+  cmp_ok(fs.num_explicit_fields, "==", 10000, "should have 9 fields set");
+  ok(field_range_is_set(&fs, 1), "field 1 set");
+  ok(field_range_is_set(&fs, 10000), "field 10000 set");
+  ok(!field_range_is_set(&fs, 10001), "field 10001 not set");
 
   for (i = 6; i < 12; i++) {
     ok(field_range_is_set(&fs, i), "field %d set", i);
