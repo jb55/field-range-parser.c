@@ -5,5 +5,5 @@
   "description": "Parse field ranges (like the cut command)",
   "keywords": ["cut", "fields"],
   "license": "MIT",
-  "src": ["src/field-range-parser.c", "src/field-range-parser.h"]
+  "src": ["field-range-parser.c", "field-range-parser.h"]
 }
