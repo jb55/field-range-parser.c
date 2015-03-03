@@ -1,6 +1,6 @@
 {
   "name": "field-range-parser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repo": "jb55/field-range-parser.c",
   "description": "Parse field ranges (like the cut command)",
   "keywords": ["cut", "fields"],
