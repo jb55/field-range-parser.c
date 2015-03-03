@@ -8,12 +8,6 @@
 
 //#define FRP_TESTY
 
-#ifdef FRP_TESTY
-  #define debug(...) printf(__VA_ARGS__)
-#else
-  #define debug
-#endif
-
 struct fp_err fp_errs[] = {
   { FPERR_EXPECTED_INT,           "field integer expected" },
   { FPERR_EXPECTED_DASH_OR_COMMA, "field expected '-' or ','" }
@@ -25,7 +19,6 @@ consume_num(const char *str, size_t *consumed, size_t *pos) {
   char *end;
   ret = strtol(str, &end, 10);
   *consumed = end - str;
-  debug("consuming %d\n", *consumed);
   *pos += *consumed - 1;
   return ret;
 }
@@ -92,13 +85,11 @@ field_range_parse(struct field_range *fs, const char *str) {
 
   while (pos < len) {
     c = str[pos++];
-    debug("state %d\n", fs->state);
 
     switch (fs->state) {
     case FPST_START:
       // starting state
       if (c == '-') {
-        debug("start -> forward range start\n");
         range_start = 1;
         fs->state = FPST_FORWARD_RANGE_START;
         continue;
@@ -136,7 +127,6 @@ field_range_parse(struct field_range *fs, const char *str) {
     case FPST_AFTER_INT: {
       // we just parsed a number into last_num
       if (c == '-') {
-        debug("- after int\n");
         // start of a range
         range_start = last_num;
         fs->state = FPST_RANGE_START;
@@ -149,7 +139,6 @@ field_range_parse(struct field_range *fs, const char *str) {
         continue;
       }
       else {
-        debug("what does we have here %c\n", c);
         // error, we should have gotten a das or comma
         fs->state = FPST_ERROR;
         fs->err = &fp_errs[FPERR_EXPECTED_DASH_OR_COMMA];
@@ -178,7 +167,6 @@ field_range_parse(struct field_range *fs, const char *str) {
   }
   if (fs->state == FPST_RANGE_START) {
     // look like we ended with an open range
-    debug("ended with open range %d\n", range_start);
     fs->all_from = range_start;
   }
 
